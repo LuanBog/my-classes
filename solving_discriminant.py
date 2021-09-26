@@ -25,4 +25,4 @@ if __name__ == '__main__':
     nature_of_root = get_nature_of_root(result)
     full_discriminant_equation = get_full_discriminant_equation(a, b, c)
 
-    print('Equation: b\u00b2-4ac\nSolved Equation: {} = {}\nNature of root: {}'.format(full_discriminant_equation, result, nature_of_root))
+    print('\nEquation: b\u00b2-4ac\nSolved Equation: {} = {}\nNature of root: {}'.format(full_discriminant_equation, result, nature_of_root))
