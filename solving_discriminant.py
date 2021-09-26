@@ -33,17 +33,23 @@ def print_solution(a, b, c):
     print('If the number is below 0, it is \"Unequal\"')
 
 if __name__ == '__main__':
-    a = int(input('A: '))
-    b = int(input('B: '))
-    c = int(input('C: '))
-    show_solution = input('Show solution? (y/n): ').lower()
+    try:
+        a = int(input('A: '))
+        b = int(input('B: '))
+        c = int(input('C: '))
+    
+        show_solution = input('Show solution? (y/n): ').lower()
 
-    result = solve(a, b, c)
-    nature_of_root = get_nature_of_root(result)
-    full_discriminant_equation = get_full_discriminant_equation(a, b, c)
+        result = solve(a, b, c)
+        nature_of_root = get_nature_of_root(result)
+        full_discriminant_equation = get_full_discriminant_equation(a, b, c)
 
-    print('\nEquation: b\u00b2 - 4ac\nSolved Equation: {} = {}\nNature of root: {}'.format(full_discriminant_equation, result, nature_of_root.title()))
+        print('\nEquation: b\u00b2 - 4ac\nSolved Equation: {} = {}\nNature of root: {}'.format(full_discriminant_equation, result, nature_of_root.title()))
 
-    if show_solution == 'y' or show_solution == 'yes':
-        print('\n-------------------- SOLUTION --------------------')
-        print_solution(a, b, c)
+        if show_solution == 'y' or show_solution == 'yes':
+            print('\n-------------------- SOLUTION --------------------')
+            print_solution(a, b, c)
+    except ValueError:
+        print('\nPlease only put numbers for A, B & C!')
+    except KeyboardInterrupt:
+        print('\n\nQuiting. Have fun learning!')
