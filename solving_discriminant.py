@@ -14,7 +14,7 @@ def get_nature_of_root(number):
     elif number > 0:
         return 'real and unequal'
     else:
-        return 'unequal'
+        return 'unreal'
 
 def print_solution(a, b, c):
     result = solve(a, b, c)
@@ -30,7 +30,7 @@ def print_solution(a, b, c):
     print(f'For the nature of root. It is \"{get_nature_of_root(result).title()}\", because...')
     print('If the number is 0, it is \"Real And Equal\"')
     print('If the number is above 0, it is \"Real And Unequal\"')
-    print('If the number is below 0, it is \"Unequal\"')
+    print('If the number is below 0, it is \"Unreal\"')
 
 if __name__ == '__main__':
     try:
