@@ -1,4 +1,4 @@
-def solve(a, b, c):
+def solve_discriminant(a, b, c):
     first = (b ** 2)
     second = 4 * (a * c)
     discriminant = first - second
@@ -17,7 +17,7 @@ def get_nature_of_root(number):
         return 'unreal'
 
 def print_solution(a, b, c):
-    result = solve(a, b, c)
+    result = solve_discriminant(a, b, c)
 
     print(f'a = {a}, b = {b}, c = {c}   This is what is given to us')
     print('b\u00b2 - 4ac   This is the equation we\'re working with')
@@ -37,10 +37,9 @@ if __name__ == '__main__':
         a = int(input('A: '))
         b = int(input('B: '))
         c = int(input('C: '))
-    
         show_solution = input('Show solution? (y/n): ').lower()
 
-        result = solve(a, b, c)
+        result = solve_discriminant(a, b, c)
         nature_of_root = get_nature_of_root(result)
         full_discriminant_equation = get_full_discriminant_equation(a, b, c)
 
