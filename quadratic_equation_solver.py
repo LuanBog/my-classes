@@ -57,7 +57,7 @@ def print_solution(a, b, c):
     print(f'For the nature of root. It is \"{nature_of_root.title()}\", because...')
     print('If the discriminant is 0, it is \"Real And Equal\"')
     print('If the discriminant is above 0, it is \"Real And Unequal\"')
-    print('If the discriminant is below 0, it is \"Unequal\"')
+    print('If the discriminant is below 0, it is \"Unreal\"')
     print(f'{discriminant} = {nature_of_root.title()}')
     if nature_of_root == 'real and equal':
         print('Because our nature of root is "{}". This tells us that x\u2081 and x\u2082 are going to be equal'.format(nature_of_root.title()))
@@ -112,7 +112,7 @@ def print_solution_discriminant_only(a, b, c):
     print(f'For the nature of root. It is \"{nature_of_root.title()}\", because...')
     print('If the discriminant is 0, it is \"Real And Equal\"')
     print('If the discriminant is above 0, it is \"Real And Unequal\"')
-    print('If the discriminant is below 0, it is \"Unequal\"')
+    print('If the discriminant is below 0, it is \"Unreal\"')
     print(f'{discriminant} = {nature_of_root.title()}')
     if nature_of_root == 'real and equal':
         print('Because our nature of root is "{}". This tells us that x\u2081 and x\u2082 are going to be equal'.format(nature_of_root.title()))
