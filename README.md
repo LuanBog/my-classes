@@ -1,2 +1,2 @@
-# My math class
-I've made some code for my math class, so it can auto-solve things that I already know, so I don't waste paper and time
+# My classes
+I've made some codes for some of my classes, so my life is a bit easier
