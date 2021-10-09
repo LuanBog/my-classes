@@ -2,6 +2,7 @@
 
 import math
 
+
 def to_binary(decimal):
     binary = ''
     target = decimal
@@ -68,12 +69,26 @@ def get_sub_number(to):
         return '\u2081\u2086'
 
 def main():
-    print('Convert from:')
-    from_ = input('[A] Decimal (Base 10) [More coming soon]: ')
-    print('Convert to:')
-    to = input('[A] Binary (Base 2), [B] Octal (Base 8), [C] Hexadecimal (Base 16): ').lower()
-    decimal = int(input('Value: '))
+    print('\nConvert from:')
+    from_ = input('[A] Decimal (Base 10) [More coming soon]: ').lower()
 
+    if from_ != 'a':
+        print('\nThat is not a valid choice!')
+        return
+
+    print('\nConvert to:')
+    to = input('[A] Binary (Base 2), [B] Octal (Base 8), [C] Hexadecimal (Base 16): ').lower()
+
+    if not to in ['a', 'b', 'c']:
+        print('\nThat is not a valid choice!')
+        return
+    
+    try:
+        decimal = int(input('Value: '))
+    except ValueError:
+        print('\nYou can only put numbers!')
+        return
+    
     result = ''
     sub_number = get_sub_number(to)
     
