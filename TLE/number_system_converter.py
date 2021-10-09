@@ -80,10 +80,13 @@ def main():
     print('\n---------------------------------------- RESULT ----------------------------------------\n')
 
     if to == 'a':
+        print('Decimal (Base 10) -> Binary (Base 2)\n')
         result = to_binary(decimal)
     elif to == 'b':
+        print('Decimal (Base 10) -> Octal (Base 8)\n')
         result = to_octal(decimal)
     elif to == 'c':
+        print('Decimal (Base 10) -> Hexadecimal (Base 16)\n')
         result = to_hexadecimal(decimal)
 
     print('\n{}\u2081\u2080 = {}{}'.format(decimal, result, sub_number))
