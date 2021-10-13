@@ -87,7 +87,7 @@ def addition(a, b):
 
     carries = carries[::-1]
 
-    print('Addition:\n')
+    print('\nAddition:\n')
     print(seperate(carries))
     print(adjust_string + seperate(a))
     print(adjust_string + seperate(adjust(a, b)))
@@ -105,13 +105,8 @@ def addition(a, b):
     print('{} = {} = {}'.format(sum_checking['equations']['first'], sum_checking['equations']['second'], sum_checking['result']))
 
     print('\n{} + {} = {}'.format(a_checking['result'], b_checking['result'], sum_checking['result']))
+    print('{} + {} = {}'.format(a, b, sum))
 
-    print('')
-
-    if a_checking['result'] + b_checking['result'] == sum_checking['result']:
-        print('Since {} + {} = {}. This is correct!'.format(a_checking['result'], b_checking['result'], sum_checking['result']))
-    else:
-        print('This is wrong, please report to Luan directly on discord or create an issue on the github repository (https://github.com/LuanBog/my-classes/tree/master), so I can fix this. When making an issue, please state the two binaries that you tried to sum') # Just making sure
 
 def main():
     try:
