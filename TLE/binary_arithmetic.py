@@ -25,6 +25,31 @@ def seperate(text, amount=1):
     
     return new_text.rstrip() 
 
+def check(binary):
+    first_equation = []
+    second_equation = []
+
+    result = {
+        'equations': {
+            'first': '',
+            'second': ''
+        },
+        'result': 0,
+    }
+
+    for index, octet in enumerate(binary[::-1]):
+        first_equation.append('({}x2^{})'.format(octet, index))
+        second_equation.append(str(int(octet) * (2 ** index)))
+        result['result'] += int(octet) * (2 ** index)
+
+    first_equation = ' + '.join(reversed(first_equation))
+    second_equation = '({})'.format(' + '.join(reversed(second_equation)))
+
+    result['equations']['first'] = first_equation
+    result['equations']['second'] = second_equation
+
+    return result
+
 def addition(a, b):
     sum = bin(int(a, 2) + int(b, 2))[2:]
     adjust_count = len(seperate(sum)) - len(seperate(a))
@@ -62,6 +87,25 @@ def addition(a, b):
     print('-' * len(seperate(sum)))
     print(seperate(sum))
 
+    print('\nChecking:\n')
+
+    a_checking = check(a)
+    b_checking = check(b)
+    sum_checking = check(sum)
+
+    print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
+    print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
+    print('{} = {} = {}'.format(sum_checking['equations']['first'], b_checking['equations']['second'], sum_checking['result']))
+
+    print('\n{} + {} = {}'.format(a_checking['result'], b_checking['result'], sum_checking['result']))
+
+    print('')
+
+    if a_checking['result'] + b_checking['result'] == sum_checking['result']:
+        print('Since {} + {} = {}. This is correct!'.format(a_checking['result'], b_checking['result'], sum_checking['result']))
+    else:
+        print('This is wrong, please report to Luan directly on discord or create an issue on the github repository (https://github.com/LuanBog/my-classes/tree/master), so I can fix this. When making an issue, please state the two binaries that you tried to sum') # Just making sure
+
 def main():
     top_binary = input('Top Binary: ')
     bottom_binary = input('Bottom Binary: ')
@@ -70,7 +114,7 @@ def main():
     if operation == '+':
         addition(top_binary, bottom_binary)
     else:
-        print('That hasn\'t been implemented yet!')
+        print('\nOperation "{}" has not been implemented yet!'.format(operation))
 
 if __name__ == '__main__':
     main()
