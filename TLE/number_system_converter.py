@@ -69,42 +69,45 @@ def get_sub_number(to):
         return '\u2081\u2086'
 
 def main():
-    print('\nConvert from:')
-    from_ = input('[A] Decimal (Base 10) [More coming soon]: ').lower()
-
-    if from_ != 'a':
-        print('\nThat is not a valid choice!')
-        return
-
-    print('\nConvert to:')
-    to = input('[A] Binary (Base 2), [B] Octal (Base 8), [C] Hexadecimal (Base 16): ').lower()
-
-    if not to in ['a', 'b', 'c']:
-        print('\nThat is not a valid choice!')
-        return
-    
     try:
-        decimal = int(input('Value: '))
-    except ValueError:
-        print('\nYou can only put numbers!')
-        return
-    
-    result = ''
-    sub_number = get_sub_number(to)
-    
-    print('\n---------------------------------------- RESULT ----------------------------------------\n')
+        print('\nConvert from:')
+        from_ = input('[A] Decimal (Base 10) [More coming soon]: ').lower()
 
-    if to == 'a':
-        print('Decimal (Base 10) -> Binary (Base 2)\n')
-        result = to_binary(decimal)
-    elif to == 'b':
-        print('Decimal (Base 10) -> Octal (Base 8)\n')
-        result = to_octal(decimal)
-    elif to == 'c':
-        print('Decimal (Base 10) -> Hexadecimal (Base 16)\n')
-        result = to_hexadecimal(decimal)
+        if from_ != 'a':
+            print('\nThat is not a valid choice!')
+            return
 
-    print('\n{}\u2081\u2080 = {}{}'.format(decimal, result, sub_number))
+        print('\nConvert to:')
+        to = input('[A] Binary (Base 2), [B] Octal (Base 8), [C] Hexadecimal (Base 16): ').lower()
+
+        if not to in ['a', 'b', 'c']:
+            print('\nThat is not a valid choice!')
+            return
+        
+        try:
+            decimal = int(input('\nValue: '))
+        except ValueError:
+            print('\nYou can only put numbers!')
+            return
+        
+        result = ''
+        sub_number = get_sub_number(to)
+        
+        print('\n---------------------------------------- RESULT ----------------------------------------\n')
+
+        if to == 'a':
+            print('Decimal (Base 10) -> Binary (Base 2)\n')
+            result = to_binary(decimal)
+        elif to == 'b':
+            print('Decimal (Base 10) -> Octal (Base 8)\n')
+            result = to_octal(decimal)
+        elif to == 'c':
+            print('Decimal (Base 10) -> Hexadecimal (Base 16)\n')
+            result = to_hexadecimal(decimal)
+
+        print('\n{}\u2081\u2080 = {}{}'.format(decimal, result, sub_number))
+    except KeyboardInterrupt:
+        print('\n\nQuiting. Have fun learning!')
 
 if __name__ == '__main__':
     main()
