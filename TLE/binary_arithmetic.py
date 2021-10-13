@@ -102,7 +102,7 @@ def addition(a, b):
 
     print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
     print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
-    print('{} = {} = {}'.format(sum_checking['equations']['first'], b_checking['equations']['second'], sum_checking['result']))
+    print('{} = {} = {}'.format(sum_checking['equations']['first'], sum_checking['equations']['second'], sum_checking['result']))
 
     print('\n{} + {} = {}'.format(a_checking['result'], b_checking['result'], sum_checking['result']))
 
