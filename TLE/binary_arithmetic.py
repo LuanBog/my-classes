@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+def is_binary(binary):
+    for octet in binary:
+        if not octet in ['0', '1']:
+            return False
+
+    return True
+
 # If a's length is longer than b
 def adjust(a, b):
     if len(a) == len(b):
@@ -107,14 +114,27 @@ def addition(a, b):
         print('This is wrong, please report to Luan directly on discord or create an issue on the github repository (https://github.com/LuanBog/my-classes/tree/master), so I can fix this. When making an issue, please state the two binaries that you tried to sum') # Just making sure
 
 def main():
-    top_binary = input('Top Binary: ')
-    bottom_binary = input('Bottom Binary: ')
-    operation = input('[+] Addition, [-] Subtraction, [*] Multiplication, [/] Division: ')
+    try:
+        top_binary = input('Top Binary: ')
 
-    if operation == '+':
-        addition(top_binary, bottom_binary)
-    else:
-        print('\nOperation "{}" has not been implemented yet!'.format(operation))
+        if not is_binary(top_binary):
+            print('\nPlease only put binary!')
+            exit(1)
+
+        bottom_binary = input('Bottom Binary: ')
+
+        if not is_binary(bottom_binary):
+            print('\nPlease only put binary!')
+            exit(1)
+            
+        operation = input('[+] Addition, [-] Subtraction, [*] Multiplication, [/] Division: ')
+
+        if operation == '+':
+            addition(top_binary, bottom_binary)
+        else:
+            print('\nOperation "{}" has not been implemented yet!'.format(operation))
+    except KeyboardInterrupt:
+        print('\n\nQuiting. Have fun learning!')
 
 if __name__ == '__main__':
     main()
