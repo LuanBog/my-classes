@@ -2,8 +2,28 @@
 
 import math
 
+#  Binary
 
-def to_binary(decimal):
+def binary_to_decimal(binary):
+    first_equation = []
+    second_equation = []
+    result = 0
+
+    for index, octet in enumerate(binary[::-1]):
+        first_equation.append('({} x 2^{})'.format(octet, index))
+        second_equation.append(str(int(octet) * (2 ** index)))
+        result += int(octet) * (2 ** index)
+
+    first_equation = ' + '.join(reversed(first_equation))
+    second_equation = ' + '.join(reversed(second_equation))
+
+    print('{}\u2082 =\n{} = \n{} = \n{}\u2081\u2080'.format(binary, first_equation, second_equation, result))
+
+    print('\n{}\u2082 = {}\u2081\u2080'.format(binary, result))
+
+
+# Decimal
+def decimal_to_binary(decimal):
     binary = ''
     target = decimal
 
@@ -19,7 +39,7 @@ def to_binary(decimal):
 
     return binary[::-1]
 
-def to_octal(decimal):
+def decimal_to_octal(decimal):
     octal = ''
     target = decimal
 
@@ -35,7 +55,7 @@ def to_octal(decimal):
 
     return octal[::-1]
 
-def to_hexadecimal(decimal):
+def decimal_to_hexadecimal(decimal):
     hexadecimal = []
     target = decimal
 
@@ -71,21 +91,21 @@ def get_sub_number(to):
 def main():
     try:
         print('\nConvert from:')
-        from_ = input('[A] Decimal (Base 10) [More coming soon]: ').lower()
+        from_ = input('[A] Binary (Base 2), [B] Decimal (Base 10): ').lower()
 
-        if from_ != 'a':
+        if not from_ in ['a', 'b']:
             print('\nThat is not a valid choice!')
             return
 
         print('\nConvert to:')
-        to = input('[A] Binary (Base 2), [B] Octal (Base 8), [C] Hexadecimal (Base 16): ').lower()
+        to = input('[A] Binary (Base 2), [B] Octal (Base 8), [C] Decimal (Base 10), [D] Hexadecimal (Base 16): ').lower()
 
-        if not to in ['a', 'b', 'c']:
+        if not to in ['a', 'b', 'c', 'd']:
             print('\nThat is not a valid choice!')
             return
         
         try:
-            decimal = int(input('\nValue: '))
+            value = input('\nValue: ')
         except ValueError:
             print('\nYou can only put numbers!')
             return
@@ -95,17 +115,24 @@ def main():
         
         print('\n---------------------------------------- RESULT ----------------------------------------\n')
 
-        if to == 'a':
-            print('Decimal (Base 10) -> Binary (Base 2)\n')
-            result = to_binary(decimal)
-        elif to == 'b':
-            print('Decimal (Base 10) -> Octal (Base 8)\n')
-            result = to_octal(decimal)
-        elif to == 'c':
-            print('Decimal (Base 10) -> Hexadecimal (Base 16)\n')
-            result = to_hexadecimal(decimal)
+        # Binary to...
+        if from_ == 'a':
+            if to == 'c':
+                print('Binary (Base 2) -> Decimal (Base 10)\n')
+                result = binary_to_decimal(value)
+        # Decimal to...
+        elif from_ == 'b':
+            if to == 'a':
+                print('Decimal (Base 10) -> Binary (Base 2)\n')
+                result = decimal_to_binary(int(value))
+            elif to == 'b':
+                print('Decimal (Base 10) -> Octal (Base 8)\n')
+                result = decimal_to_octal(int(value))
+            elif to == 'd':
+                print('Decimal (Base 10) -> Hexadecimal (Base 16)\n')
+                result = decimal_to_hexadecimal(int(value))
 
-        print('\n{}\u2081\u2080 = {}{}'.format(decimal, result, sub_number))
+            print('\n{}\u2081\u2080 = {}{}'.format(value, result, sub_number))
     except KeyboardInterrupt:
         print('\n\nQuiting. Have fun learning!')
 
