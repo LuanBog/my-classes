@@ -90,15 +90,13 @@ def get_sub_number(to):
 
 def main():
     try:
-        print('\nConvert from:')
-        from_ = input('[A] Binary (Base 2), [B] Decimal (Base 10): ').lower()
+        from_ = input('\n[A] Binary (Base 2) \n[B] Decimal (Base 10)\n\nConvert from: ').lower()
 
         if not from_ in ['a', 'b']:
             print('\nThat is not a valid choice!')
             return
 
-        print('\nConvert to:')
-        to = input('[A] Binary (Base 2), [B] Octal (Base 8), [C] Decimal (Base 10), [D] Hexadecimal (Base 16): ').lower()
+        to = input('\n[A] Binary (Base 2) \n[B] Octal (Base 8) \n[C] Decimal (Base 10) \n[D] Hexadecimal (Base 16)\n\nConvert to: ').lower()
 
         if not to in ['a', 'b', 'c', 'd']:
             print('\nThat is not a valid choice!')
