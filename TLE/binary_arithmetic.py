@@ -23,14 +23,8 @@ def binary_zip(a, b):
     return [list(x) for x in zip(a, b)]
 
 def seperate(text, amount=1):
-    text = str(text)
-
-    new_text = ''
-
-    for letter in text:
-        new_text += letter + ' ' * amount
-    
-    return new_text.rstrip() 
+    space = ' ' * amount
+    return space.join(list(str(text))) 
 
 def check(binary):
     first_equation = []
