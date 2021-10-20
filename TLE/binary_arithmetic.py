@@ -52,8 +52,8 @@ def check(binary):
     return result
 
 def addition(a, b):
-    sum = bin(int(a, 2) + int(b, 2))[2:]
-    adjust_count = len(seperate(sum)) - len(seperate(a))
+    result = bin(int(a, 2) + int(b, 2))[2:]
+    adjust_count = len(seperate(result)) - len(seperate(a))
     adjust_string =  ' ' * adjust_count if adjust_count > 0 else ''
 
     # Handles carries
@@ -85,22 +85,85 @@ def addition(a, b):
     print(seperate(carries))
     print(adjust_string + seperate(a))
     print(adjust_string + seperate(adjust(a, b)))
-    print('-' * len(seperate(sum)))
-    print(seperate(sum))
+    print('-' * len(seperate(result)))
+    print(seperate(result))
 
     print('\nChecking:\n')
 
     a_checking = check(a)
     b_checking = check(b)
-    sum_checking = check(sum)
+    result_checking = check(result)
 
     print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
     print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
-    print('{} = {} = {}'.format(sum_checking['equations']['first'], sum_checking['equations']['second'], sum_checking['result']))
+    print('{} = {} = {}'.format(result_checking['equations']['first'], result_checking['equations']['second'], result_checking['result']))
 
-    print('\n{} + {} = {}'.format(a_checking['result'], b_checking['result'], sum_checking['result']))
-    print('{} + {} = {}'.format(a, b, sum))
+    print('\n{} + {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
+    print('{} + {} = {}'.format(a, b, result))
 
+def subtraction(a, b):
+    result = bin(int(a, 2) - int(b, 2))[2:]
+    adjust_count = len(seperate(result)) - len(seperate(a))
+    adjust_string =  ' ' * adjust_count if adjust_count > 0 else ''
+
+    if len(result) != len(a):
+        result = '0' * (len(a) - len(result)) + result 
+
+    zipped = list(reversed(binary_zip(a, b)))
+    carries_first = ''
+    carries_second = ''
+
+    for index, octet in enumerate(zipped):
+        if octet[0] == '0' and octet[1] == '1':
+
+            octet.append('2')
+
+            if zipped[index + 1][0] == '1':
+                zipped[index + 1].append('0')
+            else:
+                iterations = 1
+
+                while zipped[index + iterations][0] != '1':
+                    zipped[index + iterations].append('2')
+                    zipped[index + iterations].append('1')
+                    iterations += 1
+
+                zipped[index + iterations].append('0')
+                iterations = 1
+    for octet in zipped:
+        if len(octet) >= 3:
+            carries_first += octet[2]
+        else:
+            carries_first += ' '
+
+        if len(octet) == 4:
+            carries_second += octet[3]
+        else:
+            carries_second += ' '
+
+    carries_first = carries_first[::-1]
+    carries_second = carries_second[::-1]
+
+    print('\nSubtraction:\n')
+    print(seperate(carries_second))
+    print(seperate(carries_first))
+    print(adjust_string + seperate(a))
+    print(adjust_string + seperate(adjust(a, b)))
+    print('-' * len(seperate(result)))
+    print(seperate(result))
+
+    print('\nChecking:\n')
+
+    a_checking = check(a)
+    b_checking = check(b)
+    result_checking = check(result)
+
+    print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
+    print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
+    print('{} = {} = {}'.format(result_checking['equations']['first'], result_checking['equations']['second'], result_checking['result']))
+
+    print('\n{} - {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
+    print('{} - {} = {}'.format(a, b, result))
 
 def main():
     try:
@@ -120,6 +183,8 @@ def main():
 
         if operation == '+':
             addition(top_binary, bottom_binary)
+        elif operation == '-':
+            subtraction(top_binary, bottom_binary)
         else:
             print('\nOperation "{}" has not been implemented yet!'.format(operation))
     except KeyboardInterrupt:
