@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import math
+
 def is_binary(binary):
     for octet in binary:
         if not octet in ['0', '1']:
@@ -210,6 +212,57 @@ def multiplication(a, b):
     print('\n{} * {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
     print('{} * {} = {}'.format(a, b, result))
 
+def divison(a, b):
+    result = bin(math.trunc(int(a, 2) / int(b, 2)))[2:]
+    divisor_adjust_string = ' ' * (len(seperate(b)) + 1)
+
+    if len(result) != len(a):
+        result = '0' * (len(a) - len(result)) + result 
+
+    print('\nDivision:\n')
+    print(divisor_adjust_string + '  ' + seperate(result))
+    print(divisor_adjust_string + '-' * (len(seperate(a)) + 3))
+    print('{} | {}'.format(seperate(b), seperate(a)))
+
+    # counter = 0
+    # target = ''
+
+    # for octet in a:
+    #     try:
+    #         if int(target, 2) >= int(b, 2):
+    #             subtraction_result = bin(int(a[:counter], 2) - int(target, 2))[2:]
+    #             subtraction_string = '' 
+
+    #             if subtraction_result == '0':
+    #                 subtraction_string = ' ' * len(target)
+
+    #             bring_down = a[counter]
+
+    #             print(divisor_adjust_string + '  ' +  seperate(target))
+    #             print(divisor_adjust_string + '  ' +  '-' * len(seperate(subtraction_string + bring_down)))
+    #             print(divisor_adjust_string + '  ' +  seperate(subtraction_string + bring_down))
+
+    #             break
+    #         else:
+    #             target += octet
+    #     except ValueError:
+    #         target += octet
+
+    #     counter += 1
+
+    print('\nChecking:\n')
+
+    a_checking = check(a)
+    b_checking = check(b)
+    result_checking = check(result)
+
+    print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
+    print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
+    print('{} = {} = {}'.format(result_checking['equations']['first'], result_checking['equations']['second'], result_checking['result']))
+
+    print('\n{} / {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
+    print('{} / {} = {}'.format(a, b, result))
+
 def main():
     try:
         top_binary = input('Top Binary: ')
@@ -232,8 +285,10 @@ def main():
             subtraction(top_binary, bottom_binary)
         elif operation == '*':
             multiplication(top_binary, bottom_binary)
+        elif operation == '/':
+            divison(top_binary, bottom_binary)
         else:
-            print('\nOperation "{}" has not been implemented yet!'.format(operation))
+            print('\nOperation "{}" doesn\'t exist!'.format(operation))
     except KeyboardInterrupt:
         print('\n\nQuiting. Have fun learning!')
 

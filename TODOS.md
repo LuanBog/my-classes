@@ -9,4 +9,4 @@
     * [] Binary to hexadecimal
 * [] Binary arithmetic
     * [x] Multiplication
-    * [] Divison
+    * [] Show the full solution
