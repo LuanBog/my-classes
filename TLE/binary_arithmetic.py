@@ -8,14 +8,14 @@ def is_binary(binary):
     return True
 
 # If a's length is longer than b
-def adjust(a, b):
-    if len(a) == len(b):
-        return b
+def adjust(compare_towards, target):
+    if len(compare_towards) == len(target):
+        return target
     else:
-        amount_to_add = len(a) - len(b)
-        b = ' ' * amount_to_add + b
+        amount_to_add = len(compare_towards) - len(target)
+        target = ' ' * amount_to_add + target
 
-        return b
+        return target
 
 def binary_zip(a, b):
     b = adjust(a, b)
@@ -165,6 +165,51 @@ def subtraction(a, b):
     print('\n{} - {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
     print('{} - {} = {}'.format(a, b, result))
 
+def multiplication(a, b):
+    result = bin(int(a, 2) * int(b, 2))[2:]
+    adjust_count = len(seperate(result)) - len(seperate(a))
+    adjust_string =  ' ' * adjust_count if adjust_count > 0 else ''
+
+    additions = []
+    addition_count = 0
+
+    for octet_b in reversed(b):
+        addition = ''
+
+        for octet_a in reversed(a):
+
+            if octet_b == '0':
+                addition += '0'
+            else:
+                addition += octet_a
+
+        additions.append(addition[::-1] + '0' * addition_count)
+        addition_count += 1
+
+    print('\nMultiplication:\n')
+    print(adjust_string + seperate(a))
+    print(adjust_string + seperate(adjust(a, b)))
+    print('-' * len(seperate(result)))
+
+    for binary in additions:
+        print(seperate(adjust(result, binary)))
+
+    print('-' * len(seperate(result)))
+    print(seperate(result))
+
+    print('\nChecking:\n')
+
+    a_checking = check(a)
+    b_checking = check(b)
+    result_checking = check(result)
+
+    print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
+    print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
+    print('{} = {} = {}'.format(result_checking['equations']['first'], result_checking['equations']['second'], result_checking['result']))
+
+    print('\n{} * {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
+    print('{} * {} = {}'.format(a, b, result))
+
 def main():
     try:
         top_binary = input('Top Binary: ')
@@ -185,6 +230,8 @@ def main():
             addition(top_binary, bottom_binary)
         elif operation == '-':
             subtraction(top_binary, bottom_binary)
+        elif operation == '*':
+            multiplication(top_binary, bottom_binary)
         else:
             print('\nOperation "{}" has not been implemented yet!'.format(operation))
     except KeyboardInterrupt:
