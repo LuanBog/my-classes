@@ -8,5 +8,5 @@
     * [] Binary to octal
     * [] Binary to hexadecimal
 * [] Binary arithmetic
-    * [] Multiplication
+    * [x] Multiplication
     * [] Divison
