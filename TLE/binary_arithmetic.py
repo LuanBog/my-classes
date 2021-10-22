@@ -109,7 +109,7 @@ def subtraction(a, b):
     adjust_string =  ' ' * adjust_count if adjust_count > 0 else ''
 
     if len(result) != len(a):
-        result = '0' * (len(a) - len(result)) + result 
+        result = ' ' * (len(a) - len(result)) + result 
 
     zipped = list(reversed(binary_zip(a, b)))
     carries_first = ''
@@ -158,14 +158,14 @@ def subtraction(a, b):
 
     a_checking = check(a)
     b_checking = check(b)
-    result_checking = check(result)
+    result_checking = check(result.strip())
 
     print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
     print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
     print('{} = {} = {}'.format(result_checking['equations']['first'], result_checking['equations']['second'], result_checking['result']))
 
     print('\n{} - {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
-    print('{} - {} = {}'.format(a, b, result))
+    print('{} - {} = {}'.format(a, b, result.strip()))
 
 def multiplication(a, b):
     result = bin(int(a, 2) * int(b, 2))[2:]
@@ -217,7 +217,7 @@ def divison(a, b):
     divisor_adjust_string = ' ' * (len(seperate(b)) + 1)
 
     if len(result) != len(a):
-        result = '0' * (len(a) - len(result)) + result 
+        result = ' ' * (len(a) - len(result)) + result 
 
     print('\nDivision:\n')
     print(divisor_adjust_string + '  ' + seperate(result))
@@ -254,14 +254,14 @@ def divison(a, b):
 
     a_checking = check(a)
     b_checking = check(b)
-    result_checking = check(result)
+    result_checking = check(result.strip())
 
     print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
     print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
     print('{} = {} = {}'.format(result_checking['equations']['first'], result_checking['equations']['second'], result_checking['result']))
 
     print('\n{} / {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
-    print('{} / {} = {}'.format(a, b, result))
+    print('{} / {} = {}'.format(a, b, result.strip()))
 
 def main():
     try:
