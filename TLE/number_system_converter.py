@@ -3,7 +3,7 @@
 import math
 
 #  Binary
-def binary_to_decimal(binary):
+def binary_to_decimal(binary, return_val=False):
     first_equation = []
     second_equation = []
     result = 0
@@ -20,6 +20,9 @@ def binary_to_decimal(binary):
     print('{}\u2082 =\n{} = \n{} = \n{}\u2081\u2080'.format(binary, first_equation, second_equation, result))
 
     print('\n{}\u2082 = {}\u2081\u2080'.format(binary, result))
+
+    if return_val:
+        return result
 
 # Decimal
 def decimal_to_binary(decimal):
@@ -104,8 +107,20 @@ def main():
         # Binary to...
         if from_ == 'a':
             if to == 'c':
-                print('Binary (Base 2) -> Decimal (Base 10)\n')
-                binary_to_decimal(value)
+                if len(value.split(' ')) == 1:
+                    print('Binary (Base 2) -> Decimal (Base 10)\n')
+                    binary_to_decimal(value)
+                else:
+                    result = ''
+
+                    print('Binaries (Base 2) -> Decimal (Base 10)\n')
+                    for binary in value.split(' '):
+                        print('---------- {} ----------\n'.format(binary))
+                        result += str(binary_to_decimal(binary, return_val=True))
+                        print('')
+
+                    print('{}\u2082 = {}\u2081\u2080'.format(value, result))
+
         # Decimal to...
         elif from_ == 'b':
             if to == 'a':

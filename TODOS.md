@@ -5,7 +5,7 @@
 * Simplifying in solving the roots of quadratic equation
     * Example: 2/10 -> 1/5
 * Number system converter
-    * [] Multiple binaries
+    * [x] Multiple binaries
     * [] Binary to octal
     * [] Binary to hexadecimal
     * [] Octal to binary
