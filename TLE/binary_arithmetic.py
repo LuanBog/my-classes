@@ -224,44 +224,51 @@ def divison(a, b):
     print(divisor_adjust_string + '-' * (len(seperate(a)) + 3))
     print('{} | {}'.format(seperate(b), seperate(a)))
 
-    # counter = 0
-    # target = ''
+    counter = 0
+    final = ''
 
-    # for octet in a:
-    #     try:
-    #         if int(target, 2) >= int(b, 2):
-    #             subtraction_result = bin(int(a[:counter], 2) - int(target, 2))[2:]
-    #             subtraction_string = '' 
+    for octet in result:
+        if octet == ' ':
+            continue
 
-    #             if subtraction_result == '0':
-    #                 subtraction_string = ' ' * len(target)
+        if final == '':
+            binary_being_tracked = a[0 : len(b)]
+            multiplied_by_result = bin(int(octet, 2) * int(b, 2))[2:]
+            bring_down = a[len(b)]
 
-    #             bring_down = a[counter]
+            subtraction_result = bin(int(binary_being_tracked, 2) - int(multiplied_by_result, 2))[2:]
+            
+            counter = len(b)
+        else:
+            multiplied_by_result = bin(int(octet, 2) * int(b, 2))[2:]
 
-    #             print(divisor_adjust_string + '  ' +  seperate(target))
-    #             print(divisor_adjust_string + '  ' +  '-' * len(seperate(subtraction_string + bring_down)))
-    #             print(divisor_adjust_string + '  ' +  seperate(subtraction_string + bring_down))
+            subtraction_result = bin(int(final, 2) - int(multiplied_by_result, 2))[2:]
 
-    #             break
-    #         else:
-    #             target += octet
-    #     except ValueError:
-    #         target += octet
+            if counter + 1 != len(a):
+                bring_down = a[counter + 1]
+            else:
+                bring_down = ''
 
-    #     counter += 1
+            counter += 1
+            
+        final = subtraction_result + bring_down
 
-    print('\nChecking:\n')
+        print(divisor_adjust_string + '  ' + seperate(multiplied_by_result))
+        print(divisor_adjust_string + '  ' + '-' * len(seperate(b)))
+        print(divisor_adjust_string + '  ' + seperate(final))
 
-    a_checking = check(a)
-    b_checking = check(b)
-    result_checking = check(result.strip())
+    # print('\nChecking:\n')
 
-    print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
-    print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
-    print('{} = {} = {}'.format(result_checking['equations']['first'], result_checking['equations']['second'], result_checking['result']))
+    # a_checking = check(a)
+    # b_checking = check(b)
+    # result_checking = check(result.strip())
 
-    print('\n{} / {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
-    print('{} / {} = {}'.format(a, b, result.strip()))
+    # print('{} = {} = {}'.format(a_checking['equations']['first'], a_checking['equations']['second'], a_checking['result']))
+    # print('{} = {} = {}'.format(b_checking['equations']['first'], b_checking['equations']['second'], b_checking['result']))
+    # print('{} = {} = {}'.format(result_checking['equations']['first'], result_checking['equations']['second'], result_checking['result']))
+
+    # print('\n{} / {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
+    # print('{} / {} = {}'.format(a, b, result.strip()))
 
 def main():
     try:
