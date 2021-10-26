@@ -3,8 +3,8 @@
 import math
 
 def is_binary(binary):
-    for octet in binary:
-        if not octet in ['0', '1']:
+    for bit in binary:
+        if not bit in ['0', '1']:
             return False
 
     return True
@@ -40,10 +40,10 @@ def check(binary):
         'result': 0,
     }
 
-    for index, octet in enumerate(binary[::-1]):
-        first_equation.append('({}x2^{})'.format(octet, index))
-        second_equation.append(str(int(octet) * (2 ** index)))
-        result['result'] += int(octet) * (2 ** index)
+    for index, bit in enumerate(binary[::-1]):
+        first_equation.append('({}x2^{})'.format(bit, index))
+        second_equation.append(str(int(bit) * (2 ** index)))
+        result['result'] += int(bit) * (2 ** index)
 
     first_equation = ' + '.join(reversed(first_equation))
     second_equation = '({})'.format(' + '.join(reversed(second_equation)))
@@ -62,12 +62,12 @@ def addition(a, b):
     carries = ''
     zipped = list(reversed(binary_zip(a, b)))
 
-    for index, octet in enumerate(zipped):
-        # This octet has a carry
-        if len(octet) == 3:
+    for index, bit in enumerate(zipped):
+        # This bit has a carry
+        if len(bit) == 3:
             carries += '1'
 
-            if octet[0] == '1' or octet[1] == '1':
+            if bit[0] == '1' or bit[1] == '1':
                 if index + 1 < len(zipped):
                     zipped[index + 1].append('1')
                 else:
@@ -75,7 +75,7 @@ def addition(a, b):
         else:
             carries += ' '
 
-            if octet[0] == '1' and octet[1] == '1':
+            if bit[0] == '1' and bit[1] == '1':
                 if index + 1 < len(zipped):
                     zipped[index + 1].append('1')
                 else:
@@ -115,10 +115,10 @@ def subtraction(a, b):
     carries_first = ''
     carries_second = ''
 
-    for index, octet in enumerate(zipped):
-        if octet[0] == '0' and octet[1] == '1':
+    for index, bit in enumerate(zipped):
+        if bit[0] == '0' and bit[1] == '1':
 
-            octet.append('2')
+            bit.append('2')
 
             if zipped[index + 1][0] == '1':
                 zipped[index + 1].append('0')
@@ -132,14 +132,14 @@ def subtraction(a, b):
 
                 zipped[index + iterations].append('0')
                 iterations = 1
-    for octet in zipped:
-        if len(octet) >= 3:
-            carries_first += octet[2]
+    for bit in zipped:
+        if len(bit) >= 3:
+            carries_first += bit[2]
         else:
             carries_first += ' '
 
-        if len(octet) == 4:
-            carries_second += octet[3]
+        if len(bit) == 4:
+            carries_second += bit[3]
         else:
             carries_second += ' '
 
@@ -175,15 +175,15 @@ def multiplication(a, b):
     additions = []
     addition_count = 0
 
-    for octet_b in reversed(b):
+    for bit_b in reversed(b):
         addition = ''
 
-        for octet_a in reversed(a):
+        for bit_a in reversed(a):
 
-            if octet_b == '0':
+            if bit_b == '0':
                 addition += '0'
             else:
-                addition += octet_a
+                addition += bit_a
 
         additions.append(addition[::-1] + '0' * addition_count)
         addition_count += 1
@@ -230,13 +230,13 @@ def divison(a, b):
     final = ''
     indentation = ''
 
-    for octet in result:
-        if octet == ' ':
+    for bit in result:
+        if bit == ' ':
             continue
 
         if final == '':
             binary_being_tracked = a[0 : len(b)]
-            multiplied_by_result = bin(int(octet, 2) * int(b, 2))[2:]
+            multiplied_by_result = bin(int(bit, 2) * int(b, 2))[2:]
             bring_down = a[len(b)]
 
             subtraction_result = bin(int(binary_being_tracked, 2) - int(multiplied_by_result, 2))[2:]
@@ -246,7 +246,7 @@ def divison(a, b):
 
             counter = len(b)
         else:
-            multiplied_by_result = bin(int(octet, 2) * int(b, 2))[2:]
+            multiplied_by_result = bin(int(bit, 2) * int(b, 2))[2:]
 
             subtraction_result = bin(int(final, 2) - int(multiplied_by_result, 2))[2:]
 

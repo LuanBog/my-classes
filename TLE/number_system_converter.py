@@ -8,10 +8,10 @@ def binary_to_decimal(binary, return_val=False):
     second_equation = []
     result = 0
 
-    for index, octet in enumerate(binary[::-1]):
-        first_equation.append('({} x 2^{})'.format(octet, index))
-        second_equation.append(str(int(octet) * (2 ** index)))
-        result += int(octet) * (2 ** index)
+    for index, bit in enumerate(binary[::-1]):
+        first_equation.append('({} x 2^{})'.format(bit, index))
+        second_equation.append(str(int(bit) * (2 ** index)))
+        result += int(bit) * (2 ** index)
 
     first_equation = ' + '.join(reversed(first_equation))
     second_equation = ' + '.join(reversed(second_equation))
