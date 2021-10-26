@@ -212,6 +212,7 @@ def multiplication(a, b):
     print('\n{} * {} = {}'.format(a_checking['result'], b_checking['result'], result_checking['result']))
     print('{} * {} = {}'.format(a, b, result))
 
+# My head hurts coding divison
 def divison(a, b):
     result = bin(math.trunc(int(a, 2) / int(b, 2)))[2:]
     divisor_adjust_string = ' ' * (len(seperate(b)) + 1)
@@ -224,8 +225,10 @@ def divison(a, b):
     print(divisor_adjust_string + '-' * (len(seperate(a)) + 3))
     print('{} | {}'.format(seperate(b), seperate(a)))
 
+    # Displays the solution (Took me 5 full days to finish this and my braincells just left me)
     counter = 0
     final = ''
+    indentation = ''
 
     for octet in result:
         if octet == ' ':
@@ -237,12 +240,18 @@ def divison(a, b):
             bring_down = a[len(b)]
 
             subtraction_result = bin(int(binary_being_tracked, 2) - int(multiplied_by_result, 2))[2:]
-            
+
+            if len(subtraction_result) != len(binary_being_tracked):
+                subtraction_result = '0' * (len(binary_being_tracked) - len(subtraction_result)) + subtraction_result 
+
             counter = len(b)
         else:
             multiplied_by_result = bin(int(octet, 2) * int(b, 2))[2:]
 
             subtraction_result = bin(int(final, 2) - int(multiplied_by_result, 2))[2:]
+
+            if len(subtraction_result) != len(final):
+                subtraction_result = '0' * (len(final) - len(subtraction_result)) + subtraction_result 
 
             if counter + 1 != len(a):
                 bring_down = a[counter + 1]
@@ -252,10 +261,50 @@ def divison(a, b):
             counter += 1
             
         final = subtraction_result + bring_down
+        final_prettified = ''
 
-        print(divisor_adjust_string + '  ' + seperate(multiplied_by_result))
-        print(divisor_adjust_string + '  ' + '-' * len(seperate(b)))
-        print(divisor_adjust_string + '  ' + seperate(final))
+        #! Might need refactoring in the future 
+        # Replace the 0 at the start to spaces
+        if counter != len(a):
+            if subtraction_result == '00':
+                temp = list(final)
+                temp[0] = ' '
+                temp[1] = ' '
+
+                final_prettified = ''.join(temp)
+                final = final[1:]
+            elif subtraction_result[0] == '0':
+                temp = list(final)
+                if len(temp) == 3:
+                    temp[0] = ' '
+                else:
+                    temp[0] = ' ' * len(b)
+
+                final_prettified = ''.join(temp)
+                final = final[1:]
+            else:
+                final_prettified = final
+                final = final[1:]
+        else:
+            final_prettified = final
+
+        print(divisor_adjust_string + '  ' + indentation + seperate(multiplied_by_result))
+        print(divisor_adjust_string + '  ' + indentation + '-' * len(seperate(b)))
+        print(divisor_adjust_string + '  ' + indentation + seperate(final_prettified))
+
+        # Calculates indentation
+        starting_position = 0
+        ending_position = 0
+        final_prettified_copy = divisor_adjust_string + '  ' + seperate(final_prettified)
+        
+        for index, letter in enumerate(final_prettified_copy):
+            if letter != ' ':
+                ending_position = index
+                break
+
+        distance = (ending_position - starting_position) - len(divisor_adjust_string + '  ')
+
+        indentation += ' ' * distance
 
     # print('\nChecking:\n')
 
@@ -272,19 +321,19 @@ def divison(a, b):
 
 def main():
     try:
-        top_binary = input('Top Binary: ')
+        top_binary = '10101' # '10100110' # input('Top Binary: ')
 
         if not is_binary(top_binary):
             print('\nPlease only put binary!')
             exit(1)
 
-        bottom_binary = input('Bottom Binary: ')
+        bottom_binary = '11' # input('Bottom Binary: ')
 
         if not is_binary(bottom_binary):
             print('\nPlease only put binary!')
             exit(1)
             
-        operation = input('[+] Addition, [-] Subtraction, [*] Multiplication, [/] Division: ')
+        operation = '/' # input('[+] Addition, [-] Subtraction, [*] Multiplication, [/] Division: ')
 
         if operation == '+':
             addition(top_binary, bottom_binary)
@@ -301,3 +350,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# Todo Fix 10101 / 11. Program is still dividing despite 10 is smaller than 11.
