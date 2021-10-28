@@ -87,7 +87,7 @@ def binary_to_octal(binary):
 
     print('\n{}\u2082 = {}\u2088'.format(binary, ''.join(result)))
 
-def binary_to_hexadecimal(binary):
+def binary_to_hexadecimal(binary, return_val=False):
     result = []
     grouped = group_binary(binary, 4)
 
@@ -129,6 +129,9 @@ def binary_to_hexadecimal(binary):
 
     print('\n{}\u2082 = {}\u2081\u2086'.format(binary, ''.join(result)))
  
+    if return_val:
+        return ''.join(result)
+
 # Decimal
 def decimal_to_binary(decimal):
     result = ''
@@ -219,7 +222,7 @@ def get_factors(number, factors):
 
     return []
 
-def octal_to_binary(octal):
+def octal_to_binary(octal, return_val=False):
     result = []
     factorables = [4, 2, 1]
 
@@ -255,6 +258,9 @@ def octal_to_binary(octal):
 
     print('\n{}\u2088 = {}\u2082'.format(octal, ''.join(result)))
 
+    if return_val:
+        return ''.join(result)
+
 def octal_to_decimal(octal):
     first_equation = []
     second_equation = []
@@ -273,6 +279,14 @@ def octal_to_decimal(octal):
 
     print('\n{}\u2088 = {}\u2081\u2080'.format(octal, result))
 
+def octal_to_hexadecimal(octal):
+    # Convert to binary
+    print('Convert to binary\n')
+    binary = octal_to_binary(octal, return_val=True)    
+    print('\nConvert binary to hexadecimal\n')
+    result = binary_to_hexadecimal(binary, return_val=True)
+
+    print('\n{}\u2088 = {}\u2081\u2086'.format(octal, result))
 
 def main():
     try:
@@ -291,6 +305,8 @@ def main():
             octal_to_binary(value)
             print('\n-------------------- TO DECIMAL --------------------\n')
             octal_to_decimal(value)
+            print('\n-------------------- TO HEXADECIMAL --------------------\n')
+            octal_to_hexadecimal(value)
         elif value_type == 'c':
             print('\n-------------------- TO BINARY --------------------\n')
             decimal_to_binary(int(value))
