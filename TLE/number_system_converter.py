@@ -2,8 +2,9 @@
 
 import math
 
-#  Binary
+LETTERS = {'10': 'a', '11': 'b', '12': 'c', '13': 'd', '14': 'e', '15': 'f', '16': 'g'}
 
+#  Binary
 def group_binary(binary, count):
     result = []
     byte = '' # idk what to name this
@@ -82,6 +83,48 @@ def binary_to_octal(binary):
 
     print('\n{}\u2082 = {}\u2088'.format(binary, ''.join(result)))
 
+def binary_to_hexadecimal(binary):
+    result = []
+    grouped = group_binary(binary, 4)
+
+    print('{}\u2082 =\n{} =\n'.format(binary, ' '.join(grouped)))
+
+    byte_result = 0
+    first_equation = []
+    second_equation = []
+
+    for byte in grouped:
+        print('{}\u2082 ='.format(byte))
+
+        for index, bit in enumerate(byte[::-1]):
+            first_equation.append('({} x 2^{})'.format(bit, index))
+            second_equation.append(str(int(bit) * (2 ** index)))
+            byte_result += int(bit) * (2 ** index)
+
+        result.append(str(byte_result))
+
+        first_equation = ' + '.join(reversed(first_equation))
+        second_equation = ' + '.join(reversed(second_equation))
+
+        print('{}\u2082 =\n{} = \n{} = \n{}\u2081\u2080\n'.format(binary, first_equation, second_equation, byte_result))
+
+        first_equation = []
+        second_equation = []
+        byte_result = 0
+
+    print('{} =\n'.format(' '.join(result), ''.join(result)))
+
+    for index, bit in enumerate(result):
+        if bit in LETTERS.keys():
+            letter = LETTERS[bit]
+
+            print('{} -> {}'.format(bit, letter))
+            result[index] = letter
+    
+    print('\n{} =\n{}\u2081\u2086'.format(' '.join(result), ''.join(result)))
+
+    print('\n{}\u2082 = {}\u2081\u2086'.format(binary, ''.join(result)))
+ 
 # Decimal
 def decimal_to_binary(decimal):
     result = ''
@@ -119,8 +162,6 @@ def decimal_to_hexadecimal(decimal):
     result = []
     target = decimal
 
-    letters = {'10': 'a', '11': 'b', '12': 'c', '13': 'd', '14': 'e', '15': 'f', '16': 'g'}
-
     while target > 0:
         result_ = target / 16
         reminder = float('0.' + str(result_).split('.')[1]) * 16
@@ -131,11 +172,11 @@ def decimal_to_hexadecimal(decimal):
 
         target = math.trunc(result_) 
 
-    for index, byte in enumerate(result):
-        if byte in letters.keys():
-            letter = letters[byte]
+    for index, bit in enumerate(result):
+        if bit in LETTERS.keys():
+            letter = LETTERS[bit]
 
-            print('{} -> {}'.format(byte, letter))
+            print('{} -> {}'.format(bit, letter))
             result[index] = letter
 
     print('\n{}\u2081\u2080 = {}\u2081\u2086'.format(decimal, ''.join(result)[::-1]))
@@ -150,6 +191,8 @@ def main():
             binary_to_decimal(value)
             print('\n-------------------- TO OCTAL --------------------\n')
             binary_to_octal(value)
+            print('\n-------------------- TO HEXADECIMAL --------------------\n')
+            binary_to_hexadecimal(value)
         elif value_type == 'c':
             print('\n-------------------- TO BINARY --------------------\n')
             decimal_to_binary(int(value))
