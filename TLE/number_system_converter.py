@@ -3,7 +3,7 @@
 import math
 
 #  Binary
-def binary_to_decimal(binary, return_val=False):
+def binary_to_decimal(binary):
     first_equation = []
     second_equation = []
     result = 0
@@ -20,9 +20,6 @@ def binary_to_decimal(binary, return_val=False):
     print('{}\u2082 =\n{} = \n{} = \n{}\u2081\u2080'.format(binary, first_equation, second_equation, result))
 
     print('\n{}\u2082 = {}\u2081\u2080'.format(binary, result))
-
-    if return_val:
-        return result
 
 # Decimal
 def decimal_to_binary(decimal):
@@ -84,54 +81,22 @@ def decimal_to_hexadecimal(decimal):
 
 def main():
     try:
-        from_ = input('\n[A] Binary (Base 2) \n[B] Decimal (Base 10)\n\nConvert from: ').lower()
+        value = input('\nValue: ')        
+        value_type = input('\n[A] Binary (Base 2) \n[B] Octal (Base 8) \n[C] Decimal (Base 10) \n[D] Hexadecimal (Base 16)\n\nWhat is ({}): '.format(value)).lower()
 
-        if not from_ in ['a', 'b']:
-            print('\nThat is not a valid choice!')
-            return
+        if value_type == 'a':
+            print('\n-------------------- TO DECIMAL --------------------\n')
+            binary_to_decimal(value)
+        elif value_type == 'c':
+            print('\n-------------------- TO BINARY --------------------\n')
+            decimal_to_binary(int(value))
+            print('\n-------------------- TO OCTAL --------------------\n')
+            decimal_to_octal(int(value))
+            print('\n-------------------- TO HEXADECIMAL --------------------\n')
+            decimal_to_hexadecimal(int(value))
+        else:
+            print('\nInvalid choice!')
 
-        to = input('\n[A] Binary (Base 2) \n[B] Octal (Base 8) \n[C] Decimal (Base 10) \n[D] Hexadecimal (Base 16)\n\nConvert to: ').lower()
-
-        if not to in ['a', 'b', 'c', 'd']:
-            print('\nThat is not a valid choice!')
-            return
-        
-        try:
-            value = input('\nValue: ')
-        except ValueError:
-            print('\nYou can only put numbers!')
-            return
-        
-        print('\n---------------------------------------- RESULT ----------------------------------------\n')
-
-        # Binary to...
-        if from_ == 'a':
-            if to == 'c':
-                if len(value.split(' ')) == 1:
-                    print('Binary (Base 2) -> Decimal (Base 10)\n')
-                    binary_to_decimal(value)
-                else:
-                    result = ''
-
-                    print('Binaries (Base 2) -> Decimal (Base 10)\n')
-                    for binary in value.split(' '):
-                        print('---------- {} ----------\n'.format(binary))
-                        result += str(binary_to_decimal(binary, return_val=True))
-                        print('')
-
-                    print('{}\u2082 = {}\u2081\u2080'.format(value, result))
-
-        # Decimal to...
-        elif from_ == 'b':
-            if to == 'a':
-                print('Decimal (Base 10) -> Binary (Base 2)\n')
-                decimal_to_binary(int(value))
-            elif to == 'b':
-                print('Decimal (Base 10) -> Octal (Base 8)\n')
-                decimal_to_octal(int(value))
-            elif to == 'd':
-                print('Decimal (Base 10) -> Hexadecimal (Base 16)\n')
-                decimal_to_hexadecimal(int(value))
     except KeyboardInterrupt:
         print('\n\nQuiting. Have fun learning!')
 
