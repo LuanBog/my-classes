@@ -209,6 +209,7 @@ def get_factors(number, factors):
     # Bruteforce
     a = 0
     b = 1
+    c = 2
 
     while a != len(factors) - 1:
         if b == len(factors):
@@ -219,6 +220,35 @@ def get_factors(number, factors):
             return [factors[a], factors[b]]
 
         b += 1
+
+
+    # Does bruteforce again but with an extra number (I know this can never exeed 4)
+    if len(factors) == 4:
+        a = 0
+        b = 1
+        c = 2
+
+        # while a != len(factors):
+        while True:
+            if factors[a] + factors[b] + factors[c] == number:
+                return [factors[a], factors[b], factors[c]]
+
+            if a == len(factors) - 2:
+                break
+
+            # if b == len(factors):
+            #     a += 1
+            # elif c == len(factors):
+            #     b += 1
+            # else:
+            #     c += 1
+            
+            if c == 2:
+                c += 1
+            elif b == 1:
+                b += 1
+            else:
+                a += 1
 
     return []
 
@@ -250,9 +280,9 @@ def octal_to_binary(octal, return_val=False):
 
     print(' '.join(result))
 
-    while result[0][0] == '0':
-        print(''.join(result))
-        result[0] = result[0][1:]
+    if result[0][0] == '0':
+        while result[0][0] == '0':
+            result[0] = result[0][1:]
 
     print('{}\u2082'.format(''.join(result)))
 
@@ -288,6 +318,64 @@ def octal_to_hexadecimal(octal):
 
     print('\n{}\u2088 = {}\u2081\u2086'.format(octal, result))
 
+# Hexadecimal
+def hexadecimal_to_binary(hexadecimal):
+    result = []
+    factorables = [8, 4, 2, 1]
+
+    hexadecimal_copy = hexadecimal
+    hexadecimal = list(hexadecimal)
+
+    has_letter = False # So the terminal doesn't have an extra space
+
+    print('{}\u2081\u2086 =\n'.format(''.join(hexadecimal)))
+
+    # Make letters in numbers fi`rst
+    for index, bit in enumerate(hexadecimal):
+        for number, letter in LETTERS.items():
+            if bit.lower() == letter:
+                hexadecimal[index] = number
+                print('{} -> {}'.format(bit, number))
+
+                has_letter = True
+
+    if has_letter:
+        print('\n{} =\n'.format(' '.join(hexadecimal)))
+    else:
+        print('{} =\n'.format(' '.join(hexadecimal)))
+
+    byte = ''
+
+    for bit in hexadecimal:
+        factors = get_factors(bit, factorables)
+
+        for factor in factorables:
+            if factor in factors:
+                byte += '1'
+            else:
+                byte += '0'
+
+        print('{} ='.format(bit))
+        print('8 4 2 1')
+        print(seperate(byte))
+
+        print('')
+
+        result.append(byte)
+        byte = ''
+
+    print(' '.join(result))
+
+    if result[0][0] == '0':
+        while result[0][0] == '0':
+            result[0] = result[0][1:]
+
+        print(' '.join(result))
+
+    print('{}\u2082'.format(''.join(result)))
+
+    print('\n{}\u2081\u2086 = {}\u2082'.format(''.join(hexadecimal_copy), ''.join(result)))
+
 def main():
     try:
         value = input('\nValue: ')        
@@ -314,6 +402,9 @@ def main():
             decimal_to_octal(int(value))
             print('\n-------------------- TO HEXADECIMAL --------------------\n')
             decimal_to_hexadecimal(int(value))
+        elif value_type == 'd':
+            print('\n-------------------- TO BINARY --------------------\n')
+            hexadecimal_to_binary(value)
         else:
             print('\nInvalid choice!')
 
