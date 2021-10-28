@@ -4,6 +4,10 @@ import math
 
 LETTERS = {'10': 'a', '11': 'b', '12': 'c', '13': 'd', '14': 'e', '15': 'f', '16': 'g'}
 
+def seperate(text, amount=1):
+    space = ' ' * amount
+    return space.join(list(str(text))) 
+
 #  Binary
 def group_binary(binary, count):
     result = []
@@ -181,6 +185,76 @@ def decimal_to_hexadecimal(decimal):
 
     print('\n{}\u2081\u2080 = {}\u2081\u2086'.format(decimal, ''.join(result)[::-1]))
 
+# Octal
+def get_factors(number, factors):
+    # Example:
+    # number = 5
+    # components = [4, 2, 1]
+    # 4 + 1 is 5, so return [4, 1], else return []
+
+    number = int(number)
+
+    # Checks if number is in one of the components
+    for factor in factors:
+        if number == factor:
+            return [factor]    
+
+    # Sums up everything
+    if sum(factors) == number:
+        return factors
+
+    # Bruteforce
+    a = 0
+    b = 1
+
+    while a != len(factors) - 1:
+        if b == len(factors):
+            a += 1
+            b = 0
+
+        if factors[a] + factors[b] == number:
+            return [factors[a], factors[b]]
+
+        b += 1
+
+    return []
+
+def octal_to_binary(octal):
+    result = []
+    factorables = [4, 2, 1]
+
+    print('{}\u2088 =\n{} =\n'.format(octal, ' '.join(octal)))
+
+    byte = ''
+
+    for bit in octal:
+        factors = get_factors(bit, factorables)
+
+        for factor in factorables:
+            if factor in factors:
+                byte += '1'
+            else:
+                byte +=  '0'
+
+        print('{} ='.format(bit))
+        print('4 2 1')
+        print(seperate(byte))
+
+        print('')
+
+        result.append(byte)
+        byte = ''
+
+    print(' '.join(result))
+
+    if result[0][0] == '0':
+        print(''.join(result))
+        result[0] = result[0][1:]
+
+    print('{}\u2082'.format(''.join(result)))
+
+    print('\n{}\u2088 = {}\u2082'.format(octal, ''.join(result)))
+
 def main():
     try:
         value = input('\nValue: ')        
@@ -193,6 +267,9 @@ def main():
             binary_to_octal(value)
             print('\n-------------------- TO HEXADECIMAL --------------------\n')
             binary_to_hexadecimal(value)
+        elif value_type == 'b':
+            print('\n-------------------- TO BINARY --------------------\n')
+            octal_to_binary(value)
         elif value_type == 'c':
             print('\n-------------------- TO BINARY --------------------\n')
             decimal_to_binary(int(value))
