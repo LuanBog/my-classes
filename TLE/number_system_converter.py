@@ -2,7 +2,24 @@
 
 import math
 
-LETTERS = {'10': 'a', '11': 'b', '12': 'c', '13': 'd', '14': 'e', '15': 'f', '16': 'g'}
+def hex_number_to_letter(value, reverse=False):
+    LETTERS = {'10': 'a', '11': 'b', '12': 'c', '13': 'd', '14': 'e', '15': 'f', '16': 'g'}
+
+    if not reverse:
+        for index, bit in enumerate(value):
+            if bit in LETTERS.keys():
+                letter = LETTERS[bit]
+
+                print('{} -> {}'.format(bit, letter))
+                value[index] = letter
+    else:
+        for index, bit in enumerate(value):
+            for number, letter in LETTERS.items():
+                if bit.lower() == letter:
+                    value[index] = number
+                    print('{} -> {}'.format(bit, number))
+
+    return value
 
 def seperate(text, amount=1):
     space = ' ' * amount
@@ -118,13 +135,9 @@ def binary_to_hexadecimal(binary, return_val=False):
 
     print('{} =\n'.format(' '.join(result), ''.join(result)))
 
-    for index, bit in enumerate(result):
-        if bit in LETTERS.keys():
-            letter = LETTERS[bit]
+    print('')
+    result = hex_number_to_letter(result)
 
-            print('{} -> {}'.format(bit, letter))
-            result[index] = letter
-    
     print('\n{} =\n{}\u2081\u2086'.format(' '.join(result), ''.join(result)))
 
     print('\n{}\u2082 = {}\u2081\u2086'.format(binary, ''.join(result)))
@@ -179,12 +192,8 @@ def decimal_to_hexadecimal(decimal):
 
         target = math.trunc(result_) 
 
-    for index, bit in enumerate(result):
-        if bit in LETTERS.keys():
-            letter = LETTERS[bit]
-
-            print('{} -> {}'.format(bit, letter))
-            result[index] = letter
+    print('')
+    result = hex_number_to_letter(result)
 
     print('\n{}\u2081\u2080 = {}\u2081\u2086'.format(decimal, ''.join(result)[::-1]))
 
@@ -326,23 +335,11 @@ def hexadecimal_to_binary(hexadecimal):
     hexadecimal_copy = hexadecimal
     hexadecimal = list(hexadecimal)
 
-    has_letter = False # So the terminal doesn't have an extra space
-
     print('{}\u2081\u2086 =\n'.format(''.join(hexadecimal)))
 
-    # Make letters in numbers fi`rst
-    for index, bit in enumerate(hexadecimal):
-        for number, letter in LETTERS.items():
-            if bit.lower() == letter:
-                hexadecimal[index] = number
-                print('{} -> {}'.format(bit, number))
+    hexadecimal = hex_number_to_letter(hexadecimal, reverse=True)
 
-                has_letter = True
-
-    if has_letter:
-        print('\n{} =\n'.format(' '.join(hexadecimal)))
-    else:
-        print('{} =\n'.format(' '.join(hexadecimal)))
+    print('\n{} =\n'.format(' '.join(hexadecimal)))
 
     byte = ''
 
