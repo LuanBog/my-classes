@@ -255,6 +255,25 @@ def octal_to_binary(octal):
 
     print('\n{}\u2088 = {}\u2082'.format(octal, ''.join(result)))
 
+def octal_to_decimal(octal):
+    first_equation = []
+    second_equation = []
+    result = 0
+
+    for index, bit in enumerate(octal[::-1]):
+        first_equation.append('({} x 8^{})'.format(bit, index))
+        second_equation.append(str(int(bit) * (8 ** index)))
+        result += int(bit) * (8 ** index)
+
+    first_equation = ' + '.join(reversed(first_equation))
+    second_equation = ' + '.join(reversed(second_equation))
+
+    # Checking
+    print('{}\u2088 =\n{} = \n{} = \n{}\u2081\u2080'.format(octal, first_equation, second_equation, result))
+
+    print('\n{}\u2088 = {}\u2081\u2080'.format(octal, result))
+
+
 def main():
     try:
         value = input('\nValue: ')        
@@ -270,6 +289,8 @@ def main():
         elif value_type == 'b':
             print('\n-------------------- TO BINARY --------------------\n')
             octal_to_binary(value)
+            print('\n-------------------- TO DECIMAL --------------------\n')
+            octal_to_decimal(value)
         elif value_type == 'c':
             print('\n-------------------- TO BINARY --------------------\n')
             decimal_to_binary(int(value))
