@@ -247,7 +247,7 @@ def octal_to_binary(octal):
 
     print(' '.join(result))
 
-    if result[0][0] == '0':
+    while result[0][0] == '0':
         print(''.join(result))
         result[0] = result[0][1:]
 
