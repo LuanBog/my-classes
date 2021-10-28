@@ -71,7 +71,7 @@ def binary_to_decimal(binary):
 
     print('\n{}\u2082 = {}\u2081\u2080'.format(binary, result))
 
-def binary_to_octal(binary):
+def binary_to_octal(binary, return_val=False):
     result = []
     grouped = group_binary(binary, 3)
 
@@ -103,6 +103,9 @@ def binary_to_octal(binary):
     print('{} =\n{}\u2088'.format(' '.join(result), ''.join(result)))
 
     print('\n{}\u2082 = {}\u2088'.format(binary, ''.join(result)))
+
+    if return_val:
+        return ''.join(result)
 
 def binary_to_hexadecimal(binary, return_val=False):
     result = []
@@ -328,7 +331,7 @@ def octal_to_hexadecimal(octal):
     print('\n{}\u2088 = {}\u2081\u2086'.format(octal, result))
 
 # Hexadecimal
-def hexadecimal_to_binary(hexadecimal):
+def hexadecimal_to_binary(hexadecimal, return_val=False):
     result = []
     factorables = [8, 4, 2, 1]
 
@@ -373,6 +376,9 @@ def hexadecimal_to_binary(hexadecimal):
 
     print('\n{}\u2081\u2086 = {}\u2082'.format(''.join(hexadecimal_copy), ''.join(result)))
 
+    if return_val:
+        return ''.join(result)
+
 def hexadecimal_to_decimal(hexadecimal):
     first_equation = []
     second_equation = []
@@ -397,7 +403,13 @@ def hexadecimal_to_decimal(hexadecimal):
 
     print('\n{}\u2081\u2086 = {}\u2081\u2080'.format(''.join(hexadecimal_copy), result))
 
+def hexadecimal_to_octal(hexadecimal):
+    print('Convert to binary\n')
+    binary = hexadecimal_to_binary(hexadecimal, return_val=True)
+    print('\nConvert binary to hexadecimal\n')
+    octal = binary_to_octal(binary, return_val=True)
 
+    print('\n{}\u2081\u2086 = {}\u2088'.format(hexadecimal, octal))
 
 def main():
     try:
@@ -430,6 +442,8 @@ def main():
             hexadecimal_to_binary(value.lower())
             print('\n-------------------- TO DECIMAL --------------------\n')
             hexadecimal_to_decimal(value.lower())
+            print('\n-------------------- TO OCTAL --------------------\n')
+            hexadecimal_to_octal(value.lower())
         else:
             print('\nInvalid choice!')
 
