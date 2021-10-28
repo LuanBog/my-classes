@@ -3,6 +3,34 @@
 import math
 
 #  Binary
+
+def group_binary(binary, count):
+    result = []
+    byte = '' # idk what to name this
+
+    counter = 0
+
+    for index, bit in enumerate(binary[::-1]):
+        if counter == count:
+            result.append(byte[::-1])
+
+            byte = ''
+            counter = 0
+
+        byte += bit
+        counter += 1
+
+    result.append(byte[::-1])
+
+    result = list(reversed(result))
+
+    for i, j in enumerate(result):
+        if len(j) != count:
+            result[i] = '0'*(count - len(j)) + j
+
+    return result
+
+
 def binary_to_decimal(binary):
     first_equation = []
     second_equation = []
@@ -20,6 +48,39 @@ def binary_to_decimal(binary):
     print('{}\u2082 =\n{} = \n{} = \n{}\u2081\u2080'.format(binary, first_equation, second_equation, result))
 
     print('\n{}\u2082 = {}\u2081\u2080'.format(binary, result))
+
+def binary_to_octal(binary):
+    result = []
+    grouped = group_binary(binary, 3)
+
+    print('{}\u2082 =\n{} =\n'.format(binary, ' '.join(grouped)))
+
+    byte_result = 0
+    first_equation = []
+    second_equation = []
+
+    for byte in grouped:
+        print('{}\u2082 ='.format(byte))
+
+        for index, bit in enumerate(byte[::-1]):
+            first_equation.append('({} x 2^{})'.format(bit, index))
+            second_equation.append(str(int(bit) * (2 ** index)))
+            byte_result += int(bit) * (2 ** index)
+
+        result.append(str(byte_result))
+
+        first_equation = ' + '.join(reversed(first_equation))
+        second_equation = ' + '.join(reversed(second_equation))
+
+        print('{}\u2082 =\n{} = \n{} = \n{}\u2081\u2080\n'.format(binary, first_equation, second_equation, byte_result))
+
+        first_equation = []
+        second_equation = []
+        byte_result = 0
+
+    print('{} =\n{}\u2088'.format(' '.join(result), ''.join(result)))
+
+    print('\n{}\u2082 = {}\u2088'.format(binary, ''.join(result)))
 
 # Decimal
 def decimal_to_binary(decimal):
@@ -87,6 +148,8 @@ def main():
         if value_type == 'a':
             print('\n-------------------- TO DECIMAL --------------------\n')
             binary_to_decimal(value)
+            print('\n-------------------- TO OCTAL --------------------\n')
+            binary_to_octal(value)
         elif value_type == 'c':
             print('\n-------------------- TO BINARY --------------------\n')
             decimal_to_binary(int(value))
