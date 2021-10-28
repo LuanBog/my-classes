@@ -473,12 +473,12 @@ def main():
             exit(1)
 
         print('\n-------------------- RESULT --------------------\n')
-        print('Binary / Base 2: {}'.format(binary))
-        print('Octal / Base 8: {}'.format(octal))
-        print('Decimal / Base 10: {}'.format(decimal))
-        print('Hexadecimal / Base 16: {}'.format(hexadecimal))
+        print('Binary / Base 2: {}\u2082'.format(binary))
+        print('Octal / Base 8: {}\u2088'.format(octal))
+        print('Decimal / Base 10: {}\u2081\u2080'.format(decimal))
+        print('Hexadecimal / Base 16: {}\u2081\u2086'.format(hexadecimal))
 
-        print('\nNote: Don\'t forget if you\'re using the right value type!')
+        print('\nNote: Check if you\'re actually using the right value type!')
     except KeyboardInterrupt:
         print('\n\nQuiting. Have fun learning!')
 
