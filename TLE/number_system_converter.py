@@ -373,6 +373,32 @@ def hexadecimal_to_binary(hexadecimal):
 
     print('\n{}\u2081\u2086 = {}\u2082'.format(''.join(hexadecimal_copy), ''.join(result)))
 
+def hexadecimal_to_decimal(hexadecimal):
+    first_equation = []
+    second_equation = []
+    result = 0
+
+    hexadecimal_copy = hexadecimal
+    hexadecimal = list(hexadecimal)
+
+    print('{}\u2081\u2086 =\n'.format(''.join(hexadecimal)))
+    hexadecimal = hex_number_to_letter(hexadecimal, reverse=True)
+
+    for index, bit in enumerate(hexadecimal[::-1]):
+        first_equation.append('({} x 16^{})'.format(bit, index))
+        second_equation.append(str(int(bit) * (16 ** index)))
+        result += int(bit) * (16 ** index)
+
+    first_equation = ' + '.join(reversed(first_equation))
+    second_equation = ' + '.join(reversed(second_equation))
+
+    # Checking
+    print('\n{} =\n{} = \n{} = \n{}\u2081\u2080'.format(' '.join(hexadecimal), first_equation, second_equation, result))
+
+    print('\n{}\u2081\u2086 = {}\u2081\u2080'.format(''.join(hexadecimal_copy), result))
+
+
+
 def main():
     try:
         value = input('\nValue: ')        
@@ -401,7 +427,9 @@ def main():
             decimal_to_hexadecimal(int(value))
         elif value_type == 'd':
             print('\n-------------------- TO BINARY --------------------\n')
-            hexadecimal_to_binary(value)
+            hexadecimal_to_binary(value.lower())
+            print('\n-------------------- TO DECIMAL --------------------\n')
+            hexadecimal_to_decimal(value.lower())
         else:
             print('\nInvalid choice!')
 
