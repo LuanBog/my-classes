@@ -2,6 +2,9 @@
 
 import math
 
+def prettify(number):
+    return int(number) if float(number).is_integer() else number
+
 def calculate_mean(values, show_solution=False):
     sum_ = 0
 
@@ -70,9 +73,9 @@ def calculate_varience(values):
 
     # Solution
     print('Mean (rounded): {}\n'.format(sample_mean))
-    print('x: ' + ', '.join(map(lambda x: str(x), values)))
-    print('xi - mean: ' + ', '.join(map(lambda x: str(x), subtracted)))
-    print('xi - mean\u00B2: ' + ', '.join(map(lambda x: str(x), squared)))
+    print('x: ' + ', '.join(map(lambda x: str(prettify(x)), values)))
+    print('xi - mean: ' + ', '.join(map(lambda x: str(prettify(x)), subtracted)))
+    print('xi - mean\u00B2: ' + ', '.join(map(lambda x: str(prettify(x)), squared)))
 
     print('\nSum up xi - mean\u00B2: {}'.format(sum(squared)))
     print('Divide by n-1 ({}): {} / {} = {}'.format(len(values) - 1, sum(squared), len(values) - 1, variance))
@@ -91,7 +94,7 @@ def main():
 
     print('\nType "go" to calculate.')
     while True:
-        print('\nValues: ' + ', '.join(map(lambda x: str(x), values)))
+        print('\nValues: ' + ', '.join(map(lambda x: str(prettify(x)), values)))
         value_input = input('Value: ')
 
         if value_input.lower() != 'go':
@@ -104,14 +107,14 @@ def main():
     print('Solution:\n')
     mean = calculate_mean(values, show_solution=True)
 
-    print('\nMean: ' + str(mean))
+    print('\nMean: ' + str(prettify(mean)))
     
     print('\n-------------------- MEDIAN --------------------\n')
 
     print('Solution:\n')
     median = calculate_median(values)
 
-    print('\nMedian: ' + str(median))
+    print('\nMedian: ' + str(prettify(median)))
 
     print('\n-------------------- MODE --------------------\n')
     
@@ -123,39 +126,39 @@ def main():
     else:
         print('Took the values that appeared frequently in the set\n')
 
-    print('Mode: ' + ', '.join(map(lambda x: str(x), mode)))
+    print('Mode: ' + ', '.join(map(lambda x: str(prettify(x)), mode)))
 
     print('\n-------------------- RANGE --------------------\n')
 
     print('Solution:\n')
-    print('The difference of the maximum value and minimum value. {} - {} = {}'.format(max(values), min(values), max(values) - min(values)))
+    print('The difference of the maximum value and minimum value. {} - {} = {}'.format(prettify(max(values)), prettify(min(values)), prettify(max(values)) - prettify(min(values))))
 
     range_ = calculate_range(values)
-    print('\nRange: ' + str(range_))    
+    print('\nRange: ' + str(prettify(range_)))    
 
     print('\n-------------------- VARIANCE --------------------\n')
 
     print('Solution:\n')
     variance = calculate_varience(values)
-    print('\nVariance: ' + str(variance))    
+    print('\nVariance: ' + str(prettify(variance)))    
 
     print('\n-------------------- STANDARD DEVIATION --------------------\n')
 
     print('Solution:\n')
     standard_deviation = calculate_standard_deviation(values)
-    print('\nStandard Deviation: ' + str(standard_deviation))
+    print('\nStandard Deviation: ' + str(prettify(standard_deviation)))
 
     print('\n-------------------- RESULT --------------------\n')
 
-    print('Values given: ' + ', '.join(map(lambda x: str(x), values)))
-    print('Values sorted: ' + ', '.join(map(lambda x: str(x), sorted(values))))
+    print('Values given: ' + ', '.join(map(lambda x: str(prettify(x)), values)))
+    print('Values sorted: ' + ', '.join(map(lambda x: str(prettify(x)), sorted(values))))
     print('')
-    print('Mean: ' + str(mean))
-    print('Median: ' + str(median))
-    print('Mode: ' + ', '.join(map(lambda x: str(x), mode)))
-    print('Range: ' + str(range_))   
-    print('Variance: ' + str(variance))    
-    print('Standard Deviation: ' + str(standard_deviation))
+    print('Mean: ' + str(prettify(mean)))
+    print('Median: ' + str(prettify(median)))
+    print('Mode: ' + ', '.join(map(lambda x: str(prettify(x)), mode)))
+    print('Range: ' + str(prettify(range_)))   
+    print('Variance: ' + str(prettify(variance)))    
+    print('Standard Deviation: ' + str(prettify(standard_deviation)))
 
 if __name__ == '__main__':
     main()
