@@ -38,7 +38,7 @@ def calculate_mode(values):
             result.append(key)
     
     if len(result) == len(values):
-        return []
+        return None 
 
     return result
 
@@ -46,15 +46,17 @@ def calculate_median(values):
     values = sorted(values)
     middle = float(len(values)) / 2
 
+    print('First we sort our set of values in ascending order: ' + ', '.join(map(lambda x: str(prettify(x)), sorted(values))))
+
     if middle % 2 != 0:
-        print('n or the number of values is {}, it\'s an even number,'.format(len(values)))
+        print('n or the number of values is {}, it\'s an odd number,'.format(len(values)))
         print('we just take the middle term {}'.format(values[int(middle - .5)]))
 
         return values[int(middle - .5)]
     else:
         two_median_terms = [values[int(middle)], values[int(middle-1)]]
 
-        print('n or the number of values is {}, it\'s an odd number,'.format(len(values)))
+        print('n or the number of values is {}, it\'s an even number,'.format(len(values)))
         print('so we add the two middle numbers. {} + {} = {},'.format(two_median_terms[0], two_median_terms[1], sum(two_median_terms)))
         print('then we divide it by 2. {} / 2 = {}'.format(sum(two_median_terms), sum(two_median_terms) / 2))
 
@@ -121,12 +123,17 @@ def main():
     mode = calculate_mode(values)
 
     print('Solution:\n')
-    if len(mode) == 1:
-        print('Took the value that appeared frequently in the set\n')
+    if mode:
+        if len(mode) == 1:
+            print('Took the value that appeared frequently in the set\n')
+        else:
+            print('Took the values that appeared frequently in the set\n')
+        
+        print('Mode: ' + ', '.join(map(lambda x: str(prettify(x)), mode)))
     else:
-        print('Took the values that appeared frequently in the set\n')
+        print('Took the value that appeared frequently in the set. In this case, there is none\n')
 
-    print('Mode: ' + ', '.join(map(lambda x: str(prettify(x)), mode)))
+        print('Mode: None')
 
     print('\n-------------------- RANGE --------------------\n')
 
@@ -155,7 +162,10 @@ def main():
     print('')
     print('Mean: ' + str(prettify(mean)))
     print('Median: ' + str(prettify(median)))
-    print('Mode: ' + ', '.join(map(lambda x: str(prettify(x)), mode)))
+    if mode:
+        print('Mode: ' + ', '.join(map(lambda x: str(prettify(x)), mode)))
+    else:
+        print('Mode: None')
     print('Range: ' + str(prettify(range_)))   
     print('Variance: ' + str(prettify(variance)))    
     print('Standard Deviation: ' + str(prettify(standard_deviation)))
