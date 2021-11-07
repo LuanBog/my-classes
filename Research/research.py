@@ -38,7 +38,13 @@ def calculate_mode(values):
             result.append(key)
     
     if len(result) == len(values):
+        print('No solution')
         return None 
+
+    # Solution
+    print('VALUE: FREQUENCY')
+    for key, value in reoccuring_values.items():
+        print('{}: {}'.format(prettify(key), value))
 
     return result
 
@@ -120,20 +126,14 @@ def main():
 
     print('\n-------------------- MODE --------------------\n')
     
-    mode = calculate_mode(values)
 
     print('Solution:\n')
-    if mode:
-        if len(mode) == 1:
-            print('Took the value that appeared frequently in the set\n')
-        else:
-            print('Took the values that appeared frequently in the set\n')
-        
-        print('Mode: ' + ', '.join(map(lambda x: str(prettify(x)), mode)))
-    else:
-        print('Took the value that appeared frequently in the set. In this case, there is none\n')
+    mode = calculate_mode(values)
 
-        print('Mode: None')
+    if mode:
+        print('\nMode: ' + ', '.join(map(lambda x: str(prettify(x)), mode)))
+    else:
+        print('\nMode: None')
 
     print('\n-------------------- RANGE --------------------\n')
 
