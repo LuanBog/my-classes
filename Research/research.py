@@ -106,7 +106,10 @@ def main():
         value_input = input('Value: ')
 
         if value_input.lower() != 'go':
-            values.append(float(value_input))
+            try:
+                values.append(float(value_input))
+            except ValueError:
+                print('\nOnly put numbers or type "go" to calculate!')
         else:
             break
 
