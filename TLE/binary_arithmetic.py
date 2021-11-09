@@ -238,33 +238,33 @@ def divison(a, b):
     print('{} / {} = {}'.format(a, b, result.strip()))
 
 def main():
-    try:
-        top_binary = input('Top Binary: ')
+    top_binary = input('Top Binary: ')
 
-        if not is_binary(top_binary):
-            print('\nPlease only put binary!')
-            exit(1)
+    if not is_binary(top_binary):
+        print('\nPlease only put binary!')
+        exit(1)
 
-        bottom_binary = input('Bottom Binary: ')
+    bottom_binary = input('Bottom Binary: ')
 
-        if not is_binary(bottom_binary):
-            print('\nPlease only put binary!')
-            exit(1)
-            
-        operation = input('[+] Addition, [-] Subtraction, [*] Multiplication, [/] Division: ')
+    if not is_binary(bottom_binary):
+        print('\nPlease only put binary!')
+        exit(1)
+        
+    operation = input('[+] Addition, [-] Subtraction, [*] Multiplication, [/] Division: ')
 
-        if operation == '+':
-            addition(top_binary, bottom_binary)
-        elif operation == '-':
-            subtraction(top_binary, bottom_binary)
-        elif operation == '*':
-            multiplication(top_binary, bottom_binary)
-        elif operation == '/':
-            divison(top_binary, bottom_binary)
-        else:
-            print('\nOperation "{}" doesn\'t exist!'.format(operation))
-    except KeyboardInterrupt:
-        print('\n\nQuiting. Have fun learning!')
+    if operation == '+':
+        addition(top_binary, bottom_binary)
+    elif operation == '-':
+        subtraction(top_binary, bottom_binary)
+    elif operation == '*':
+        multiplication(top_binary, bottom_binary)
+    elif operation == '/':
+        divison(top_binary, bottom_binary)
+    else:
+        print('\nOperation "{}" doesn\'t exist!'.format(operation))
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\n\nQuiting. Have fun learning!')

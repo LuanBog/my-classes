@@ -171,4 +171,7 @@ def main():
     print('Standard Deviation: ' + str(prettify(standard_deviation)))
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\n\nQuiting. Have fun learning!')

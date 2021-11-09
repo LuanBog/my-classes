@@ -165,8 +165,9 @@ def main():
             print_solution(a, b, c)
     except ValueError:
         print('\nPlease only put numbers for A, B & C!')
-    except KeyboardInterrupt:
-        print('\n\nQuiting. Have fun learning!')
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\n\nQuiting. Have fun learning!')

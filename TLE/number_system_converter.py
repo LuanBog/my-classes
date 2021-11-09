@@ -424,63 +424,63 @@ def hexadecimal_to_octal(hexadecimal):
     return octal
 
 def main():
-    try:
-        value = input('\nValue: ')        
-        value_type = input('\n[A] Binary (Base 2) \n[B] Octal (Base 8) \n[C] Decimal (Base 10) \n[D] Hexadecimal (Base 16)\n\nWhat is ({}): '.format(value)).lower()
+    value = input('\nValue: ')        
+    value_type = input('\n[A] Binary (Base 2) \n[B] Octal (Base 8) \n[C] Decimal (Base 10) \n[D] Hexadecimal (Base 16)\n\nWhat is ({}): '.format(value)).lower()
 
-        if value_type == 'a':
-            print('\n-------------------- TO OCTAL --------------------\n')
-            octal = binary_to_octal(value)
-            print('\n-------------------- TO DECIMAL --------------------\n')
-            decimal = binary_to_decimal(value)
-            print('\n-------------------- TO HEXADECIMAL --------------------\n')
-            hexadecimal = binary_to_hexadecimal(value)
+    if value_type == 'a':
+        print('\n-------------------- TO OCTAL --------------------\n')
+        octal = binary_to_octal(value)
+        print('\n-------------------- TO DECIMAL --------------------\n')
+        decimal = binary_to_decimal(value)
+        print('\n-------------------- TO HEXADECIMAL --------------------\n')
+        hexadecimal = binary_to_hexadecimal(value)
 
-            binary = value
-        elif value_type == 'b':
-            print('\n-------------------- TO BINARY --------------------\n')
-            binary = octal_to_binary(value)
-            print('\n-------------------- TO DECIMAL --------------------\n')
-            decimal = octal_to_decimal(value)
-            print('\n-------------------- TO HEXADECIMAL --------------------\n')
-            hexadecimal = octal_to_hexadecimal(value)
+        binary = value
+    elif value_type == 'b':
+        print('\n-------------------- TO BINARY --------------------\n')
+        binary = octal_to_binary(value)
+        print('\n-------------------- TO DECIMAL --------------------\n')
+        decimal = octal_to_decimal(value)
+        print('\n-------------------- TO HEXADECIMAL --------------------\n')
+        hexadecimal = octal_to_hexadecimal(value)
 
-            octal = value
-        elif value_type == 'c':
-            value = int(value)
+        octal = value
+    elif value_type == 'c':
+        value = int(value)
 
-            print('\n-------------------- TO BINARY --------------------\n')
-            binary = decimal_to_binary(value)
-            print('\n-------------------- TO OCTAL --------------------\n')
-            octal = decimal_to_octal(value)
-            print('\n-------------------- TO HEXADECIMAL --------------------\n')
-            hexadecimal = decimal_to_hexadecimal(value)
+        print('\n-------------------- TO BINARY --------------------\n')
+        binary = decimal_to_binary(value)
+        print('\n-------------------- TO OCTAL --------------------\n')
+        octal = decimal_to_octal(value)
+        print('\n-------------------- TO HEXADECIMAL --------------------\n')
+        hexadecimal = decimal_to_hexadecimal(value)
 
-            decimal = value
-        elif value_type == 'd':
-            value = value.lower()
+        decimal = value
+    elif value_type == 'd':
+        value = value.lower()
 
-            print('\n-------------------- TO BINARY --------------------\n')
-            binary = hexadecimal_to_binary(value)
-            print('\n-------------------- TO OCTAL --------------------\n')
-            octal = hexadecimal_to_octal(value)
-            print('\n-------------------- TO DECIMAL --------------------\n')
-            decimal = hexadecimal_to_decimal(value)
+        print('\n-------------------- TO BINARY --------------------\n')
+        binary = hexadecimal_to_binary(value)
+        print('\n-------------------- TO OCTAL --------------------\n')
+        octal = hexadecimal_to_octal(value)
+        print('\n-------------------- TO DECIMAL --------------------\n')
+        decimal = hexadecimal_to_decimal(value)
 
-            hexadecimal = value
-        else:
-            print('\nInvalid choice!')
-            exit(1)
+        hexadecimal = value
+    else:
+        print('\nInvalid choice!')
+        exit(1)
 
-        print('\n-------------------- RESULT --------------------\n')
-        print('Binary / Base 2: {}\u2082'.format(binary))
-        print('Octal / Base 8: {}\u2088'.format(octal))
-        print('Decimal / Base 10: {}\u2081\u2080'.format(decimal))
-        print('Hexadecimal / Base 16: {}\u2081\u2086'.format(hexadecimal))
+    print('\n-------------------- RESULT --------------------\n')
+    print('Binary / Base 2: {}\u2082'.format(binary))
+    print('Octal / Base 8: {}\u2088'.format(octal))
+    print('Decimal / Base 10: {}\u2081\u2080'.format(decimal))
+    print('Hexadecimal / Base 16: {}\u2081\u2086'.format(hexadecimal))
 
-        print('\nNote: Check if you\'re actually using the right value type!')
-    except KeyboardInterrupt:
-        print('\n\nQuiting. Have fun learning!')
+    print('\nNote: Check if you\'re actually using the right value type!')
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\n\nQuiting. Have fun learning!')

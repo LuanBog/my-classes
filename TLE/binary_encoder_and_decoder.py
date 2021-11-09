@@ -17,23 +17,23 @@ def decode(binaries):
     return result
 
 def main():
-    try:
-        mode = input('\n[A] Encode\n[B] Decode\n\nMode: ').lower()
+    mode = input('\n[A] Encode\n[B] Decode\n\nMode: ').lower()
 
-        if mode == 'a':
-            text = input('\nEnter text: ')
-            encoded = encode(text.strip())
+    if mode == 'a':
+        text = input('\nEnter text: ')
+        encoded = encode(text.strip())
 
-            print('Encoded: {}'.format(encoded))
-        elif mode == 'b':
-            binaries = input('\nEnter binaries: ')
-            decoded = decode(binaries.strip())
+        print('Encoded: {}'.format(encoded))
+    elif mode == 'b':
+        binaries = input('\nEnter binaries: ')
+        decoded = decode(binaries.strip())
 
-            print('Decoded: {}'.format(decoded))
-        else:
-            print('\nThat mode doesn\'t exist!')
-    except KeyboardInterrupt:
-        print('\n\nQuiting. Have fun learning!')
+        print('Decoded: {}'.format(decoded))
+    else:
+        print('\nThat mode doesn\'t exist!')
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\n\nQuiting. Have fun learning!')
