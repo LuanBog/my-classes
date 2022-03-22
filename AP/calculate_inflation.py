@@ -3,11 +3,10 @@
 def calculate(total_weighted_price_last_year, total_weighted_price_this_year):
     cpi = round((total_weighted_price_this_year / total_weighted_price_last_year) * 100, 2)
     inflation_rate = round(((cpi - 100) / 100) * 100, 2)
-    purchasing_power_first = round(100 / cpi, 3)
-    purchasing_power_second = round(100 / cpi, 2)
+    purchasing_power = round(100 / cpi, 2)
 
     print('\n-------------------- RESULT --------------------')
-    print('\nCPI: {} \nInflation Rate: {}%\nPurchasing Power: {} or {}'.format(cpi, inflation_rate, purchasing_power_first, purchasing_power_second))
+    print('\nCPI: {} \nInflation Rate: {}%\nPurchasing Power: {}'.format(cpi, inflation_rate, purchasing_power))
 
     print('\n-------------------- SOLUTION --------------------')
     
@@ -27,7 +26,7 @@ def calculate(total_weighted_price_last_year, total_weighted_price_this_year):
     print('\nPurchasing power = 100 / CPI')
     print(f'                 = 100 / {cpi}')
     print(f'                 = {100 / cpi}')
-    print(f'Purchasing power = {purchasing_power_second} (rounded to 2)')
+    print(f'Purchasing power = {purchasing_power} (rounded to 2)')
 
 def main():
     try:
